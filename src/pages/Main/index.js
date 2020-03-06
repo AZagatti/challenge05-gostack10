@@ -11,6 +11,22 @@ class Main extends Component {
     loading: false,
   };
 
+  componentDidMount() {
+    const repositories = localStorage.getItem('repositories');
+
+    if (repositories) {
+      this.setState({ repositories: JSON.parse(repositories) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { repositories } = this.state;
+
+    if (prevState.repositories !== repositories) {
+      localStorage.setItem('repositories', JSON.stringify(repositories));
+    }
+  }
+
   handleInputChange = e => {
     this.setState({ newRepo: e.target.value });
   };
@@ -29,8 +45,8 @@ class Main extends Component {
     };
 
     this.setState({
-      repositories: [...repositories, data],
       newRepo: '',
+      repositories: [...repositories, data],
       loading: false,
     });
   };
@@ -49,7 +65,7 @@ class Main extends Component {
           <input
             type="text"
             placeholder="Adicionar repositório"
-            vale={newRepo}
+            value={newRepo}
             onChange={this.handleInputChange}
           />
 
