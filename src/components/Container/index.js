@@ -8,6 +8,11 @@ const Container = styled.div`
   padding: 30px;
   margin: 80px auto;
 
+  p {
+    color: red;
+    margin: 3px 0 0 3px;
+  }
+
   h1 {
     font-size: 20px;
     display: flex;

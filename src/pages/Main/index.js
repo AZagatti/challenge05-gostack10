@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import api from '../../services/api';
-import { Form, SubmitButton, List } from './styles';
+import { Form, SubmitButton, List, Input } from './styles';
 
 class Main extends Component {
   state = {
     newRepo: '',
     repositories: [],
     loading: false,
+    error: false,
   };
 
   componentDidMount() {
@@ -40,21 +41,37 @@ class Main extends Component {
 
     const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`);
+    try {
+      const repoExists = repositories.find(
+        repository => repository.name === newRepo
+      );
 
-    const data = {
-      name: response.data.full_name,
-    };
+      if (repoExists) {
+        throw new Error('Repositório duplicado');
+      }
+      console.log(repoExists);
 
-    this.setState({
-      newRepo: '',
-      repositories: [...repositories, data],
-      loading: false,
-    });
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      this.setState({
+        newRepo: '',
+        repositories: [...repositories, data],
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({
+        error: true,
+        loading: false,
+      });
+    }
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, error } = this.state;
 
     return (
       <Container>
@@ -64,11 +81,12 @@ class Main extends Component {
         </h1>
 
         <Form onSubmit={this.handleSubmit}>
-          <input
+          <Input
             type="text"
             placeholder="Adicionar repositório"
             value={newRepo}
             onChange={this.handleInputChange}
+            error={error}
           />
 
           <SubmitButton loading={loading}>
@@ -79,6 +97,8 @@ class Main extends Component {
             )}
           </SubmitButton>
         </Form>
+
+        {error && <p>Erro ao cadastrar repositório</p>}
 
         <List>
           {repositories.map(repository => (
