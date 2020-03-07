@@ -30,8 +30,8 @@ class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
-          per_page: 5,
+          state: 'all',
+          per_page: 10,
         },
       }),
     ]);
@@ -42,6 +42,23 @@ class Repository extends Component {
       loading: false,
     });
   }
+
+  handleUpdateIssues = async issueState => {
+    const { match } = this.props;
+
+    const repoName = decodeURIComponent(match.params.repository);
+
+    const issues = await api.get(`/repos/${repoName}/issues?state`, {
+      params: {
+        state: issueState,
+        per_page: 10,
+      },
+    });
+
+    this.setState({
+      issues: issues.data,
+    });
+  };
 
   render() {
     const { repository, issues, loading } = this.state;
@@ -60,13 +77,25 @@ class Repository extends Component {
         </Owner>
 
         <Filter>
-          <Button type="button" color="#7d7d7d">
+          <Button
+            type="button"
+            color="#7d7d7d"
+            onClick={() => this.handleUpdateIssues('all')}
+          >
             Todas
           </Button>
-          <Button type="button" color="#0bb836">
+          <Button
+            type="button"
+            color="#0bb836"
+            onClick={() => this.handleUpdateIssues('open')}
+          >
             Abertas
           </Button>
-          <Button type="button" color="#b80b0b">
+          <Button
+            type="button"
+            color="#b80b0b"
+            onClick={() => this.handleUpdateIssues('closed')}
+          >
             Fechadas
           </Button>
         </Filter>
