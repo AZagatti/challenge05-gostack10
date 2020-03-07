@@ -28,15 +28,15 @@
 
 This is module and challenge 05 of the [Rocketseat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) developed with the following technologies:
 
-- [Axios](https://github.com/axios/axios)
-- [Babel](https://babeljs.io/)
-- [Create React App](https://github.com/facebook/create-react-app)
-- [Eslint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [Prop Types](https://www.npmjs.com/package/prop-types)
-- [React](https://reactjs.org/)
-- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
-- [Styled Components](https://styled-components.com/)
+*   [Axios](https://github.com/axios/axios)
+*   [Babel](https://babeljs.io/)
+*   [Create React App](https://github.com/facebook/create-react-app)
+*   [Eslint](https://eslint.org/)
+*   [Prettier](https://prettier.io/)
+*   [Prop Types](https://www.npmjs.com/package/prop-types)
+*   [React](https://reactjs.org/)
+*   [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+*   [Styled Components](https://styled-components.com/)
 
 ## 👁 Preview
 
