@@ -42,9 +42,28 @@ export const Owner = styled.div`
   }
 `;
 
+export const Filter = styled.div`
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  background-color: ${props => props.color};
+  border: 1px solid #eee;
+  border-radius: 4px;
+  color: #fff;
+
+  & + button {
+    margin-left: 10px;
+  }
+`;
+
 export const IssueList = styled.ul`
-  padding-top: 30px;
-  margin-top: 30px;
+  padding-top: 15px;
+  margin-top: 15px;
   border-top: 1px solid #eee;
   list-style: none;
 

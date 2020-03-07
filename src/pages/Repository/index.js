@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import api from '../../services/api';
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, Filter, Button } from './styles';
 
 class Repository extends Component {
   static propTypes = {
@@ -59,13 +59,29 @@ class Repository extends Component {
           <p>{repository.description}</p>
         </Owner>
 
+        <Filter>
+          <Button type="button" color="#7d7d7d">
+            Todas
+          </Button>
+          <Button type="button" color="#0bb836">
+            Abertas
+          </Button>
+          <Button type="button" color="#b80b0b">
+            Fechadas
+          </Button>
+        </Filter>
+
         <IssueList>
           {issues.map(issue => (
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
                 <strong>
-                  <a href={issue.html_url} target="_blank">
+                  <a
+                    href={issue.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {issue.title}
                   </a>
                   {issue.labels.map(label => (
