@@ -72,7 +72,7 @@ class Repository extends Component {
   };
 
   render() {
-    const { repository, issues, loading, page } = this.state;
+    const { repository, issues, loading, page, issueState } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -91,6 +91,7 @@ class Repository extends Component {
           <Button
             type="button"
             color="#7159c1"
+            style={{ opacity: issueState === 'all' ? 1.0 : 0.5 }}
             onClick={() => this.setState({ issueState: 'all' })}
           >
             Todas
@@ -98,6 +99,7 @@ class Repository extends Component {
           <Button
             type="button"
             color="#0bb836"
+            style={{ opacity: issueState === 'open' ? 1.0 : 0.5 }}
             onClick={() => this.setState({ issueState: 'open' })}
           >
             Abertas
@@ -105,6 +107,7 @@ class Repository extends Component {
           <Button
             type="button"
             color="#b80b0b"
+            style={{ opacity: issueState === 'closed' ? 1.0 : 0.5 }}
             onClick={() => this.setState({ issueState: 'closed' })}
           >
             Fechadas
