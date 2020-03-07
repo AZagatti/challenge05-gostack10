@@ -42,7 +42,7 @@ export const Owner = styled.div`
   }
 `;
 
-export const Filter = styled.div`
+export const ButtonWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   align-items: center;
@@ -55,6 +55,11 @@ export const Button = styled.button`
   border: 1px solid #eee;
   border-radius: 4px;
   color: #fff;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 
   & + button {
     margin-left: 10px;

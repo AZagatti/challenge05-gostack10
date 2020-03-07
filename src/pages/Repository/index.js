@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 import Container from '../../components/Container';
 import api from '../../services/api';
-import { Loading, Owner, IssueList, Filter, Button } from './styles';
+import { Loading, Owner, IssueList, ButtonWrapper, Button } from './styles';
 
 class Repository extends Component {
   static propTypes = {
@@ -19,10 +20,13 @@ class Repository extends Component {
     repository: {},
     issues: [],
     loading: true,
+    page: 1,
+    issueState: 'all',
   };
 
   async componentDidMount() {
     const { match } = this.props;
+    const { page } = this.state;
 
     const repoName = decodeURIComponent(match.params.repository);
 
@@ -31,7 +35,7 @@ class Repository extends Component {
       api.get(`/repos/${repoName}/issues`, {
         params: {
           state: 'all',
-          per_page: 10,
+          page,
         },
       }),
     ]);
@@ -43,25 +47,32 @@ class Repository extends Component {
     });
   }
 
-  handleUpdateIssues = async issueState => {
-    const { match } = this.props;
+  async componentDidUpdate(_, prevState) {
+    const { issueState, page } = this.state;
+    if (prevState.issueState !== issueState || prevState.page !== page) {
+      const { match } = this.props;
 
-    const repoName = decodeURIComponent(match.params.repository);
+      const repoName = decodeURIComponent(match.params.repository);
 
-    const issues = await api.get(`/repos/${repoName}/issues?state`, {
-      params: {
-        state: issueState,
-        per_page: 10,
-      },
-    });
+      const issues = await api.get(`/repos/${repoName}/issues`, {
+        params: {
+          state: issueState,
+          page,
+        },
+      });
 
+      this.handleUpdateIssues(issues);
+    }
+  }
+
+  handleUpdateIssues = issues => {
     this.setState({
       issues: issues.data,
     });
   };
 
   render() {
-    const { repository, issues, loading } = this.state;
+    const { repository, issues, loading, page } = this.state;
 
     if (loading) {
       return <Loading>Carregando</Loading>;
@@ -76,29 +87,29 @@ class Repository extends Component {
           <p>{repository.description}</p>
         </Owner>
 
-        <Filter>
+        <ButtonWrapper>
           <Button
             type="button"
-            color="#7d7d7d"
-            onClick={() => this.handleUpdateIssues('all')}
+            color="#7159c1"
+            onClick={() => this.setState({ issueState: 'all' })}
           >
             Todas
           </Button>
           <Button
             type="button"
             color="#0bb836"
-            onClick={() => this.handleUpdateIssues('open')}
+            onClick={() => this.setState({ issueState: 'open' })}
           >
             Abertas
           </Button>
           <Button
             type="button"
             color="#b80b0b"
-            onClick={() => this.handleUpdateIssues('closed')}
+            onClick={() => this.setState({ issueState: 'closed' })}
           >
             Fechadas
           </Button>
-        </Filter>
+        </ButtonWrapper>
 
         <IssueList>
           {issues.map(issue => (
@@ -122,6 +133,23 @@ class Repository extends Component {
             </li>
           ))}
         </IssueList>
+
+        <ButtonWrapper>
+          <Button
+            color="#7159c1"
+            disabled={page === 1}
+            onClick={() => this.setState(state => ({ page: state.page - 1 }))}
+          >
+            <FaAngleLeft color="#FFF" size={24} />
+          </Button>
+          <Button
+            color="#7159c1"
+            disabled={!issues.length > 0}
+            onClick={() => this.setState(state => ({ page: state.page + 1 }))}
+          >
+            <FaAngleRight color="#FFF" size={24} />
+          </Button>
+        </ButtonWrapper>
       </Container>
     );
   }
