@@ -9,13 +9,13 @@
 <p align="center">Web application with integration into the Github API.</blockquote>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/azagatti/challenge04-gostack10?color=%23FFD300&style=plastic">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/azagatti/challenge05-gostack10?color=FFD300&style=plastic">
 
-<img alt="Language percent" src="https://img.shields.io/github/languages/top/azagatti/challenge04-gostack10?color=FFD300&style=plastic">
+<img alt="Language percent" src="https://img.shields.io/github/languages/top/azagatti/challenge05-gostack10?color=FFD300&style=plastic">
 
   <img alt="Code Quality" src="https://img.shields.io/codacy/grade/8ad75adf65704c3e9cfec172b18a0663?style=plastic">
 
-  <img alt="License" src="https://img.shields.io/github/license/AZagatti/challenge04-gostack10?style=plastic">
+  <img alt="License" src="https://img.shields.io/github/license/AZagatti/challenge05-gostack10?style=plastic">
 </p>
 
 <p align="center">
