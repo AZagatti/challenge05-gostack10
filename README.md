@@ -13,7 +13,7 @@
 
 <img alt="Language percent" src="https://img.shields.io/github/languages/top/azagatti/challenge05-gostack10?color=FFD300&style=plastic">
 
-  <img alt="Code Quality" src="https://img.shields.io/codacy/grade/8ad75adf65704c3e9cfec172b18a0663?style=plastic">
+  <img alt="Code Quality" src="https://img.shields.io/codacy/grade/d10f14e7c75f427d9f5cbc7932c88ad8?style=plastic">
 
   <img alt="License" src="https://img.shields.io/github/license/AZagatti/challenge05-gostack10?style=plastic">
 </p>
