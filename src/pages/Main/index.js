@@ -49,7 +49,6 @@ class Main extends Component {
       if (repoExists) {
         throw new Error('Repositório duplicado');
       }
-      console.log(repoExists);
 
       const response = await api.get(`/repos/${newRepo}`);
 
