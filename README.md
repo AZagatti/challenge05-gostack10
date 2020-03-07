@@ -40,7 +40,7 @@ This is module and challenge 05 of the [Rocketseat GoStack Bootcamp](https://roc
 
 ## 👁 Preview
 
-<img src="https://res.cloudinary.com/zagatti/image/upload/v1583290206/general/Screenshot_20200303_225709_xjlxc0.png" alt="Preview" />
+![](https://res.cloudinary.com/zagatti/video/upload/v1583546646/readme/readme-desafio05_iixd4q.mp4)
 
 ## 📝 License
 
